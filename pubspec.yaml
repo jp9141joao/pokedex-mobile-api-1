@@ -26,3 +26,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/characters.png
+    - assets/filters.png
+    - assets/login.png
+    - assets/register.png

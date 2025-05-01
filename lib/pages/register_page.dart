@@ -11,26 +11,45 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _email = TextEditingController();
   final _password = TextEditingController();
+  bool _loading = false;
+
+  bool _validateFields() {
+    if (_email.text.isEmpty || !_email.text.contains('@')) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Email inválido')),
+      );
+      return false;
+    }
+    if (_password.text.length < 6) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+            content: Text('A senha deve ter no mínimo 6 caracteres')),
+      );
+      return false;
+    }
+    return true;
+  }
 
   Future<void> _register() async {
-    if (_email.text.isEmpty || _password.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Preencha todos os campos')));
-      return;
-    }
+    if (!_validateFields()) return;
+    setState(() => _loading = true);
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _email.text.trim(),
         password: _password.text.trim(),
       );
       if (!mounted) return;
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('Usuário cadastrado')));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Usuário cadastrado com sucesso')));
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Erro: ${e.message}')));
+      String msg = 'Erro ao cadastrar';
+      if (e.code == 'email-already-in-use') {
+        msg = 'Este email já está em uso';
+      }
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+    } finally {
+      if (mounted) setState(() => _loading = false);
     }
   }
 
@@ -38,13 +57,15 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text('Cadastrar', style: GoogleFonts.lato()),
-          centerTitle: true),
+        title: Text('Criar Conta', style: GoogleFonts.lato()),
+        centerTitle: true,
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(24),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           TextField(
               controller: _email,
+              keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(labelText: 'Email')),
           const SizedBox(height: 16),
           TextField(
@@ -52,7 +73,17 @@ class _RegisterPageState extends State<RegisterPage> {
               obscureText: true,
               decoration: const InputDecoration(labelText: 'Senha')),
           const SizedBox(height: 24),
-          ElevatedButton(onPressed: _register, child: const Text('Cadastrar'))
+          ElevatedButton(
+            onPressed: _loading ? null : _register,
+            style: ElevatedButton.styleFrom(
+              minimumSize: const Size.fromHeight(50),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)),
+            ),
+            child: _loading
+                ? const CircularProgressIndicator()
+                : const Text('Cadastrar'),
+          ),
         ]),
       ),
     );

@@ -30,7 +30,7 @@ Uma aplicação Flutter Web que consome a [Rick and Morty API](https://rickandmo
 1. **Clone o repositório**  
    ```bash
    git clone https://github.com/jp9141joao/mobile-project.git
-   cd mobileproject
+   cd mobile-project
    ```
 
 2. **Instale as dependências**  
@@ -68,6 +68,6 @@ Uma aplicação Flutter Web que consome a [Rick and Morty API](https://rickandmo
 ## Link de deploy
 
 - **Web Preview**: https://preview.flutlab.io/user_cfh/mobile-project/ 
-- **APK Android**: 
+
 
 

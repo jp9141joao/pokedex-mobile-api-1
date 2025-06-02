@@ -1,73 +1,74 @@
-# Rick and Morty App
+# Rick and Morty Mobile
 
-Uma aplicação Flutter Web que consome a [Rick and Morty API](https://rickandmortyapi.com/) e integra com Firebase Authentication para login, cadastro e logout.
-
----
-
-## Tecnologias
-
-- **Flutter Web** (desenvolvimento no [FlutLab](https://flutlab.io/))
-- **Dart**  
-- **Firebase Auth** (email/senha)  
-- **HTTP** (requisições REST)  
-- **Google Fonts** (tipografia moderna)  
-- **Rick and Morty API**  
+A Flutter Web application that consumes the [Rick and Morty API](https://rickandmortyapi.com/) and integrates with Firebase Authentication for login, registration, and logout.
 
 ---
 
-## Funcionalidades
+## Technologies
 
-- **Login / Cadastro** com validação de email e senha (mínimo 6 caracteres + `@`)  
-- **Proteção de rota**: só acessa a lista de personagens se logado  
-- **Listagem paginada** de personagens  
-- **Filtros** por nome, status, espécie, gênero e localização  
-- **Logout**  
+* **Flutter Web** (developed on [FlutLab](https://flutlab.io/))
+* **Dart**
+* **Firebase Auth** (email/password)
+* **HTTP** (REST requests)
+* **Google Fonts** (modern typography)
+* **Rick and Morty API**
 
 ---
 
-## Como usar
+## Features
 
-1. **Clone o repositório**  
+* **Login / Registration** with email and password validation (minimum 6 characters + `@`)
+* **Route protection**: only authenticated users can access the character list
+* **Paginated listing** of characters
+* **Filters** by name, status, species, gender, and location
+* **Logout**
+
+---
+
+## How to use
+
+1. **Clone the repository**
+
    ```bash
-   git clone https://github.com/jp9141joao/mobile-project.git
+   git clone https://github.com/jp9141joao/rick-and-morty-mobile.git
    cd mobile-project
    ```
 
-2. **Instale as dependências**  
+2. **Install dependencies**
+
    ```bash
    flutter pub get
    ```
 
-3. **Configure o Firebase**  
-   - No console do Firebase, crie um projeto e adicione um app Web.  
-   - Copie as credenciais (apiKey, authDomain, etc.) e cole em `lib/main.dart` no bloco `Firebase.initializeApp(options: ...)`.
+3. **Configure Firebase**
 
-4. **Execute no navegador**  
+   * In the Firebase Console, create a project and add a Web app.
+   * Copy the credentials (apiKey, authDomain, etc.) and paste them in `lib/main.dart` inside the `Firebase.initializeApp(options: ...)` block.
+
+4. **Run in the browser**
+
    ```bash
    flutter run -d chrome
    ```
 
 ---
 
-## Código fonte
+## Source code
 
-- Todo o código Dart está versionado no GitHub  
-- Branch principal (`main`) contém a versão estável e funcional
+* All Dart code is versioned on GitHub
+* The main branch (`main`) contains the stable and functional version
 
 ---
 
-## Prints da aplicação
-  
+## Application screenshots
+
 ![Login](assets/login.png)
-![Cadastro](assets/register.png)
-![Personagens](assets/characters.png)
-![Filtros](assets/filters.png)
+![Registration](assets/register.png)
+![Characters](assets/characters.png)
+![Filters](assets/filters.png)
 
 ---
 
-## Link de deploy
+## Deployment link
 
-- **Web Preview**: https://preview.flutlab.io/user_cfh/mobile-project/ 
-
-
-
+* **Web Preview**: [https://preview.flutlab.io/user\_cfh/mobile-project/](https://preview.flutlab.io/user_cfh/mobile-project/)
